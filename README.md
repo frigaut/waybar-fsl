@@ -46,5 +46,11 @@ In style.css:
 #custom-bg.ood {
     color: #808080;
 }
+#custom-bg {
+    font-size: 120%;
+}
 ```
 
+## TODO
+
+- [ ] Ensure fetch_bg.ts is running all the time, over network interuption, VPN switch, etc
