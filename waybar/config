@@ -1,0 +1,10 @@
+{
+    "modules-left": ["custom/bg","custom/media"],
+    // Modules configuration
+    "custom/bg": {
+        "return-type": "json",
+        "format": "   {}",
+        "exec": "/home/frigaut/bin/mybg",
+        "restart-interval": 5
+    },
+}

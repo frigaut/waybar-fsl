@@ -1,0 +1,11 @@
+#custom-bg.critical {
+    color: @critical;
+}
+
+#custom-bg.warning {
+    color: @warning;
+}
+
+#custom-bg.ood {
+    color: #808080;
+}
