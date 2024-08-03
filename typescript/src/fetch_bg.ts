@@ -1,4 +1,5 @@
 import { LibreLinkUpClient } from './client';
+// import {LibreLinkUpClient} from '@diakem/libre-link-up-api-client';
 import * as fs from 'fs';
 
 function delay(ms: number) {
@@ -15,8 +16,6 @@ function delay(ms: number) {
 
   while (true) {
     const data = await libreClient.read();
-    // var bg_value = data.current.value;
-    // let bg_value: number = (Math.round(data.current.value * 10) / 10).toFixed(1);
 
     let trend: string = '?';
     let state: string = 'good';
@@ -61,9 +60,6 @@ function delay(ms: number) {
 
     let datesec: number = Date.parse(data.current.date.toLocaleString())/1000;
 
-    // let result: string = `{ "bg":"${data.current.value} ${trend}", "state":"` + state +`"}`;
-    // let result: string = `{"bg":${data.current.value}, "trend":"${trend}", "state":"` + state +`"}`;
-    // let result: string = `{ "text":"${data.current.value} ${trend}", "class":"` + state +`"}`; // this works
     let result: string = `{ "text":"${data.current.value} ${trend}", "class":"` + state +`", "date":${datesec}}`;
 
     console.log(result);
@@ -73,5 +69,3 @@ function delay(ms: number) {
   }
 
 })();
-
-// date: 2024-08-02T11:08:34.000Z

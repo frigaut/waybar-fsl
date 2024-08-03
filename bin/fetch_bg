@@ -16,7 +16,7 @@ while true; do
 
   if [ "$is_network" == "ok" ]; then
     echo "we have network" >> /tmp/fetch_bg.log
-    # start fetching from libreview
+    # We're on! Start fetching from libreview
     cd /home/frigaut/packages/libre-link-up-api-client/src
     echo "Starting fetch_bg.ts" >> /tmp/fetch_bg.log
     ts-node fetch_bg.ts >> /tmp/fetch_bg.log 2>&1
