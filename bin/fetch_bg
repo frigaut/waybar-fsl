@@ -2,28 +2,29 @@
 # This script checks for network, and if network is available
 # starts fetch_bg.ts to fetch BG values from libreview.
 
-# check for connectivity
 while true; do
 
-	if pgrep -u frigaut -i -c -f "fetch_bg.ts" &> /dev/null 2>&1; then
-  # service.py is running, it should not be
-  	echo "fetch_bg.ts already running"
-  	exit 1
-	fi
+  # check if fetcher is already running
+  if pgrep -u frigaut -i -c -f "fetch_bg.ts" &> /dev/null 2>&1; then
+  # fetch_bg.ts is running, it should not be, bailing out
+    echo "fetch_bg.ts already running"
+    exit 1
+  fi
 
-	is_network=$(ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && echo ok || echo error)
+  # check for connectivity
+  is_network=$(ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && echo ok || echo error)
 
-	if [ "$is_network" == "ok" ]; then
-		echo "we have network"
-		# start fetching from libreview
-		cd /home/frigaut/packages/libre-link-up-api-client/src
-		echo "Starting fetch_bg.ts" >> /tmp/fetch_bg.log
-		ts-node fetch_bg.ts >> /tmp/fetch_bg.log 2>&1
-	else
-		echo "No network, waiting for a bit"
-	fi
+  if [ "$is_network" == "ok" ]; then
+    echo "we have network" >> /tmp/fetch_bg.log
+    # start fetching from libreview
+    cd /home/frigaut/packages/libre-link-up-api-client/src
+    echo "Starting fetch_bg.ts" >> /tmp/fetch_bg.log
+    ts-node fetch_bg.ts >> /tmp/fetch_bg.log 2>&1
+  else
+    echo "No network, waiting for a bit" >> /tmp/fetch_bg.log
+  fi
 
-	sleep 4;
+  sleep 5;
 
 done
 

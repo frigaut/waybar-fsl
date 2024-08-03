@@ -4,17 +4,18 @@ text=`cat /tmp/bg.txt | jq -r .text`
 class=`cat /tmp/bg.txt | jq -r .class`
 date=`cat /tmp/bg.txt | jq .date`
 
-echo $text
-echo $date
 now=`date +"%s"`
-echo $now
 
 old=$((now-date))
 if [ $old -gt 300 ]; then
 	class="ood";
 fi
 
-echo $old
-# text+=$old
-echo "${text} (${old}s)"
 echo "{\"text\":\"${text} (${old}s)\", \"class\":\"${class}\"}"
+
+# pgrep -u frigaut -i -f "fetch_bg.ts"
+# will return pid of process(es)
+# pgrep -u frigaut -i -c -f "fetch_bg.ts"
+# will return number of processes
+# to test network / internet connection alive:
+# ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && echo ok || echo error
